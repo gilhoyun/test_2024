@@ -1,0 +1,114 @@
+DROP DATABASE IF EXISTS web_exam_db;
+CREATE DATABASE web_exam_db;
+USE web_exam_db;
+
+
+CREATE TABLE article(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+	, regDate DATETIME NOT NULL
+	, updateDate DATETIME NOT NULL
+	, memberId INT UNSIGNED NOT NULL
+	, title VARCHAR(100) NOT NULL
+	, `body` TEXT NOT NULL
+);
+
+			
+CREATE TABLE `member`(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+	, regDate DATETIME NOT NULL
+	, updateDate DATETIME NOT NULL
+	, email VARCHAR(80) NOT NULL UNIQUE
+	, loginPw VARCHAR(100) NOT NULL
+	, `name` VARCHAR(20) NOT NULL
+);
+
+
+CREATE TABLE reply(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+	, regDate DATETIME NOT NULL
+	, updateDate DATETIME NOT NULL
+	, memberId INT UNSIGNED NOT NULL
+	, relTypeCode VARCHAR(50) NOT NULL
+	, relId INT UNSIGNED NOT NULL
+	, `body` TEXT NOT NULL
+);
+
+INSERT INTO article
+	SET regDate = NOW()
+			, updateDate = NOW()
+			, memberId = 1
+			, title = '공지1'
+			, `body` = '공지내용1';
+			
+INSERT INTO article
+	SET regDate = NOW()
+			, updateDate = NOW()
+			, memberId = 3
+			, title = '제목2'
+			, `body` = '내용2';
+			
+INSERT INTO article
+	SET regDate = NOW()
+			, updateDate = NOW()
+			, memberId = 2
+			, title = '제목3'
+			, `body` = '내용3';
+
+INSERT INTO `member`
+	SET regDate = NOW()
+			, updateDate = NOW()
+			, email = 'test1@naver.com'
+			, loginPw = 'test1'
+			, `name` = '유저1';
+INSERT INTO `member`
+	SET regDate = NOW()
+			, updateDate = NOW()
+			, email = 'test2@naver.com'
+			, loginPw = 'test2'
+			, `name` = '유저2';
+			
+INSERT INTO `member`
+	SET regDate = NOW()
+			, updateDate = NOW()
+			, email = 'test3@naver.com'
+			, loginPw = 'test3'
+			, `name` = '유저3';
+		
+INSERT INTO reply
+	SET regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 1
+        , relTypeCode = 'article'
+        , relId = 2
+        , `body` = '댓글1';
+        
+INSERT INTO reply
+	SET regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 1
+        , relTypeCode = 'article'
+        , relId = 1
+        , `body` = '댓글2';
+        
+INSERT INTO reply
+	SET regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 3
+        , relTypeCode = 'article'
+        , relId = 1
+        , `body` = '댓글3';
+        
+INSERT INTO reply
+	SET regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 2
+        , relTypeCode = 'article'
+        , relId = 3
+        , `body` = '댓글4';
+			
+
+
+SELECT * FROM article;
+SELECT * FROM `member`;
+SELECT * FROM reply;
+
